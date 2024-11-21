@@ -2,8 +2,6 @@ import sys
 import os
 import build_data
 
-import county_demographics
-from build_data import convert_county
 
 def population_total(counties):
     total = 0
@@ -11,6 +9,9 @@ def population_total(counties):
         total += county.population['2014 Population']
     print(f"2014 Population: {total}")
     return total
+#The purpose of this function is to print the total 2014 population across all current counties.
+#The parameter is counties which is the the county demographic data.
+#The return type is an int but there is also a print statement
 
 def display(counties):
     for county in counties:
@@ -33,6 +34,11 @@ def display(counties):
         print("\t Per Capita: ", county.income["Per Capita Income"])
         print("\t Below Poverty Level: ", county.income["Persons Below Poverty Level"],"%")
 
+#The purpose of this function is to print the county information for each county.
+#The parameter is the county demographic data.
+#The return type is none but there are print statements.
+
+
 def filter_state(counties, state:str):
     filtered = []
     for county in counties:
@@ -40,7 +46,9 @@ def filter_state(counties, state:str):
             filtered.append(county)
     print(f"Filter: state == {state} ({len(filtered)}entries)")
     return filtered
-
+#The purpose of this function is to filter the counties by state so it reduces the collection of counties to those with matching state abbreviations.
+#The parameters are counties and state:str which is the county demographic data as well as the state abbreviation which is a string.
+#The return type is a list but there is also a print statement.
 
 def filter_gt(counties, field:str, threshold:float):
    field_parts = field.split('.')
@@ -68,6 +76,10 @@ def filter_gt(counties, field:str, threshold:float):
    print(f"Filter: {field} < {threshold} ({count} entries)")
    return filtered
 
+#The purpose of this function is to reduce the collection of entries for which the value of the field is greater than the threshold.
+#The parameters are counties, field:str, threshold:float.
+#The return type is a list but there are also print statements.
+
 def filter_lt(counties, field:str, threshold:float):
    field_parts = field.split('.')
    category = field_parts[0]
@@ -94,6 +106,10 @@ def filter_lt(counties, field:str, threshold:float):
    print(f"Filter: {field} < {threshold} ({count} entries)")
    return filtered
 
+#The purpose of this function is to reduce the collection of entries for which the value of the field is less than the threshold.
+#The parameters are counties, field:str, threshold:float.
+#The return type is a list but there are also print statements.
+
 def population(counties, field:str):
     total = 0
     field_parts = field.split('.')
@@ -117,6 +133,10 @@ def population(counties, field:str):
             print(f"County {county.name} does not have the required '{category}' structure")
     print(f"2014 {field} population: {total}")
     return total
+
+#The purpose of this function is to compute the total 2014 sub-population across the current counties.
+#The parameters are counties and field:str
+#The return type is an int but there are also print statements
 
 def percent(counties, field:str):
    sub_pop = 0
@@ -158,6 +178,9 @@ def percent(counties, field:str):
 
    return sub_pop_percentage
 
+#The purpose of this function is to compute the percentage of the total population within the sub-population specified by field.
+#The parameters are counties and field:str
+#The return type is an int but there are also print statements
 
 def operation():
    filename = sys.argv[1]
@@ -214,6 +237,10 @@ def operation():
 
 
    print("End of Program")
+
+   #The purpose of this function is to input the data from the text files and run it through the functions.
+   #There are no parameters.
+   #The return type is none but there are print statements and what it returns is based on the function(s) that the data in the text files is put through.
 
 
 if __name__ == "__main__":
