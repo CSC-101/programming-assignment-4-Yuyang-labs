@@ -58,14 +58,11 @@ def filter_gt(counties, field:str, threshold:float):
            else:
                raise ValueError(f"Unknown category: {category}")
 
-
            if number is not None and number > threshold:
                filtered.append(county)
 
-
        except AttributeError:
            print(f"County {county.name} does not have the required '{category} structure")
-
 
    count = len(filtered)
    print(f"Filter: {field} < {threshold} ({count} entries)")
@@ -87,14 +84,11 @@ def filter_lt(counties, field:str, threshold:float):
            else:
                raise ValueError(f"Unknown category: {category}")
 
-
            if number is not None and number < threshold:
                filtered.append(county)
 
-
        except AttributeError:
            print(f"County {county.name} does not have the required '{category} structure")
-
 
    count = len(filtered)
    print(f"Filter: {field} < {threshold} ({count} entries)")
@@ -162,21 +156,17 @@ def percent(counties, field:str):
    else:
        print("Total population is zero, cannot calculate")
 
-
    return sub_pop_percentage
-
-
 
 
 def operation():
    filename = sys.argv[1]
    try:
-       counties = build_data.get_data()  #access the full data set by converting unreadable data to readable
+       counties = build_data.get_data()
        filepath = os.path.join('inputs', filename)
-       with open(filepath, 'r') as infile:   #Automatically closes file
+       with open(filepath, 'r') as infile:
            for line in infile:
-               line = line.strip()    #removes whitespaces
-
+               line = line.strip()
 
                if "filter-state" in line:
                    state = line.split(":")[1]
